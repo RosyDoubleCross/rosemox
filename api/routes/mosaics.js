@@ -1,21 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-router.route('/:tileId')
+router.route('/:mosaicId')
     .get(function(request, response) {
-        console.log('get tile ' + request.params.tileId);
+        console.log('get mosaic ' + request.params.mosaicId);
         response.sendStatus(404);
     })
     .post(function(request, response) {
-        console.log('post tile ' + request.params.tileId);
+        console.log('post mosaic ' + request.params.mosaicId);
         response.sendStatus(404);
     })
     .delete(function(request, response) {
-        console.log('delete tile ' + request.params.tileId);
+        console.log('delete mosaic ' + request.params.mosaicId);
         response.sendStatus(404);
     })
     .put(function(request, response) {
-        console.log('put tile ' + request.params.tileId);
+        console.log('put mosaic ' + request.params.mosaicId);
         response.sendStatus(404);
     });
 
