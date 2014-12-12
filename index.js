@@ -10,9 +10,9 @@ var server = app.listen(port, function() {
     console.log('listening on port ' + port);
 });
 
-function shutdown () {
+function shutdown() {
     console.log('closing express app');
-    server.close(function () {
+    server.close(function() {
         console.log('closing database');
         app.get('db').close(function(err) {
             if (err) {
