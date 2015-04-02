@@ -1,7 +1,7 @@
 var mosaics = require('./routes/mosaics.js');
 var rules = require('./routes/rules.js');
 
-function addRoutes(app, prefix) {
+module.exports.addRoutes = function(app, prefix) {
     app.use(prefix + '/mosaics', mosaics);
     app.use(prefix + '/rules', rules);
     app.route(new RegExp('^' + prefix + '(/.*)?$'))
@@ -9,6 +9,4 @@ function addRoutes(app, prefix) {
             response.sendStatus(404);
         });
 };
-
-module.exports.addRoutes = addRoutes;
 

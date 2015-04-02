@@ -1,10 +1,9 @@
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 4815;
+var port = process.env.PORT || 4097;
+var db = require('services/db');
 
-app.set('db', require('./db.js'));
-
-require('./api/index.js').addRoutes(app, '/api');
+require(__dirname + '/api/index.js').addRoutes(app, '/api');
 
 var server = app.listen(port, function() {
     console.log('listening on port ' + port);
@@ -14,7 +13,7 @@ function shutdown() {
     console.log('closing express app');
     server.close(function() {
         console.log('closing database');
-        app.get('db').close(function(err) {
+        db.close(function(err) {
             if (err) {
                 console.log('error closing database: ' + err);
             } else {
@@ -28,3 +27,4 @@ function shutdown() {
 
 process.on('SIGTERM', shutdown);
 process.on('SIGINT', shutdown);
+
