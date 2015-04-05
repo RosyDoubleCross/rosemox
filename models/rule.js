@@ -5,15 +5,29 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    minX: DataTypes.INTEGER,
-    maxX: DataTypes.INTEGER,
-    minY: DataTypes.INTEGER,
-    maxY: DataTypes.INTEGER,
+    minX: {
+        field: "min_x",
+        type: DataTypes.INTEGER
+    },
+    maxX: {
+        field: "max_x",
+        type: DataTypes.INTEGER
+    },
+    minY: {
+        field: "min_y",
+        type: DataTypes.INTEGER
+    },
+    maxY: {
+        field: "max_y",
+        type: DataTypes.INTEGER
+    },
     minCopies: {
+        field: "min_copies",
         type: DataTypes.INTEGER,
         allowNull: false
     },
     maxCopies: {
+        field: "max_copies",
         type: DataTypes.INTEGER,
         allowNull: false
     }

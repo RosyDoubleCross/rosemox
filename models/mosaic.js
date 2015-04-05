@@ -23,6 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     content: DataTypes.TEXT,
     topLevel: {
+        field: "top_level",
         type: DataTypes.BOOLEAN,
         allowNull: false
     }
