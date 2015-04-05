@@ -1,12 +1,23 @@
-var mosaics = require('./routes/mosaics.js');
-var rules = require('./routes/rules.js');
 
 module.exports.addRoutes = function(app, prefix) {
-    app.use(prefix + '/mosaics', mosaics);
-    app.use(prefix + '/rules', rules);
-    app.route(new RegExp('^' + prefix + '(/.*)?$'))
-        .all(function (request, response) {
-            response.sendStatus(404);
-        });
+
+    var bodyParser = require('body-parser');
+    var fs = require('fs');
+    var routesPath = __dirname + '/routes/';
+
+    app.use(prefix, bodyParser.json());
+
+    fs.readdirSync(routesPath).forEach(function(file) {
+        var route = prefix + '/' + file.replace(/\.js$/, '');
+        var router = require(routesPath + file);
+        console.log('adding route ' + route);
+        app.use(route, router);
+    });
+
+    console.log('adding catchall 404 route for ' + prefix);
+
+    app.use(prefix, function (req, res, next) {
+        res.sendStatus(404);
+    });
 };
 
