@@ -1,17 +1,25 @@
 
-module.exports.addRoutes = function(app, prefix) {
+module.exports.addRoutes = function(app, db, prefix) {
 
     var bodyParser = require('body-parser');
-    var fs = require('fs');
-    var routesPath = __dirname + '/routes/';
+    var epilogue = require('epilogue');
 
     app.use(prefix, bodyParser.json());
 
-    fs.readdirSync(routesPath).forEach(function(file) {
-        var route = prefix + '/' + file.replace(/\.js$/, '');
-        var router = require(routesPath + file);
-        console.log('adding route ' + route);
-        app.use(route, router);
+    epilogue.initialize({
+        app: app,
+        sequelize: db.sequelize,
+        base: prefix
+    });
+
+    epilogue.resource({
+        model: db.Mosaic,
+        endpoints: ['/mosaic', '/mosaic/:id']
+    });
+
+    epilogue.resource({
+        model: db.Rule,
+        endpoints: ['/rule', '/rule/:id']
     });
 
     console.log('adding catchall 404 route for ' + prefix);
