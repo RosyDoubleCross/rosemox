@@ -12,13 +12,18 @@ module.exports.addRoutes = function(app, db, prefix) {
         base: prefix
     });
 
+    console.log('creating mosaic routes');
+
     epilogue.resource({
         model: db.Mosaic,
         endpoints: ['/mosaic', '/mosaic/:id']
     });
 
+    console.log('creating rule routes');
+
     epilogue.resource({
         model: db.Rule,
+        include: [db.Mosaic],
         endpoints: ['/rule', '/rule/:id']
     });
 

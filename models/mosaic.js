@@ -23,14 +23,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     content: DataTypes.TEXT,
     topLevel: {
-        field: "top_level",
         type: DataTypes.BOOLEAN,
         allowNull: false
     }
   }, {
     classMethods: {
       associate: function(models) {
-        Mosaic.hasMany(models.Rule);
+        Mosaic.hasMany(models.Rule, {
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+            foreignKey: { name: 'mosaicId', allowNull: false }
+        });
       }
     }
   });
