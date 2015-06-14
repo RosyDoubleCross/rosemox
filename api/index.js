@@ -1,6 +1,7 @@
 
-module.exports.addRoutes = function(app, db, prefix) {
+module.exports.addRoutes = function(app, prefix) {
 
+    var db = app.get('db');
     var bodyParser = require('body-parser');
     var epilogue = require('epilogue');
 

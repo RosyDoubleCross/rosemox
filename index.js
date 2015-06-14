@@ -4,7 +4,9 @@ var port = process.env.PORT || 4097;
 var db = require(__dirname + '/models/');
 var server;
 
-require(__dirname + '/api/').addRoutes(app, db, '/api');
+app.set('db', db);
+
+require(__dirname + '/api/').addRoutes(app, '/api');
 
 console.log('adding catchall 404 route for /');
 
