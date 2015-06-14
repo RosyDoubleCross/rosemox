@@ -1,11 +1,15 @@
 
-module.exports.addRoutes = function(app, prefix) {
+module.exports.addRoute = function(app, prefix) {
 
     var db = app.get('db');
     var bodyParser = require('body-parser');
     var epilogue = require('epilogue');
 
+    console.log('[' + prefix + '] adding bodyParser JSON');
+
     app.use(prefix, bodyParser.json());
+
+    console.log('[' + prefix + '] preparing epilogue');
 
     epilogue.initialize({
         app: app,
@@ -13,14 +17,14 @@ module.exports.addRoutes = function(app, prefix) {
         base: prefix
     });
 
-    console.log('creating mosaic routes');
+    console.log('[' + prefix + '] creating mosaic routes');
 
     epilogue.resource({
         model: db.Mosaic,
         endpoints: ['/mosaic', '/mosaic/:id']
     });
 
-    console.log('creating rule routes');
+    console.log('[' + prefix + '] creating rule routes');
 
     epilogue.resource({
         model: db.Rule,
@@ -28,7 +32,7 @@ module.exports.addRoutes = function(app, prefix) {
         endpoints: ['/rule', '/rule/:id']
     });
 
-    console.log('adding catchall 404 route for ' + prefix);
+    console.log('[' + prefix + '] adding catchall 404 route');
 
     app.use(prefix, function (req, res, next) {
         res.sendStatus(404);

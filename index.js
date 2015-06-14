@@ -6,9 +6,13 @@ var server;
 
 app.set('db', db);
 
-require(__dirname + '/api/').addRoutes(app, '/api');
+console.log('adding api route');
+require(__dirname + '/api/').addRoute(app, '/api');
 
-console.log('adding catchall 404 route for /');
+console.log('adding render route');
+require(__dirname + '/render/').addRoute(app, '/render');
+
+console.log('adding catchall 404 route');
 
 app.use('/', function (req, res, next) {
     res.sendStatus(404);
