@@ -1,0 +1,9 @@
+<div class="container">
+    Filter tiles: <input type="text" data-ng-model="filter.name" />
+    <br />
+    <ul>
+        <li data-ng-repeat="tile in tiles | filter:filter.name">{{ tile.id }}) {{ tile.name }}</li>
+    </ul>
+    <br />
+    nope
+</div>
